@@ -2,7 +2,7 @@ FROM ruby:2.5.1-alpine3.7
 MAINTAINER Atsushi Nagase<a@ngs.io>
 
 
-RUN apk add --update --no-cache build-base git curl git bash
+RUN apk add --update --no-cache build-base git curl git bash python
 
 ENV MECAB_VERSION 0.996
 ENV IPADIC_VERSION 2.7.0-20070801
@@ -14,6 +14,7 @@ ENV dependencies 'openssl sqlite-dev'
 RUN apk add --update --no-cache ${build_deps} \
   # Install dependencies
   && apk add --update --no-cache ${dependencies} \
+  && gem install libv8 -v 3.16.14.16 \
   # Install MeCab
   && curl -SL -o mecab-${MECAB_VERSION}.tar.gz ${mecab_url} \
   && tar zxf mecab-${MECAB_VERSION}.tar.gz \
@@ -51,6 +52,5 @@ RUN mkdir tagger && cd tagger && \
   rm -f *.tar.gz && \
   ln -s $(pwd)/cmd/* /usr/bin && \
   ln -s $(pwd)/cmd/tree-tagger-english $(pwd)/bin/tree-tagger
-
 
 ENTRYPOINT ["/bin/bash"]
