@@ -9,7 +9,7 @@ ENV IPADIC_VERSION 2.7.0-20070801
 ENV mecab_url https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicTFaRUE
 ENV ipadic_url https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7MWVlSDBCSXZMTXM
 ENV build_deps 'file sudo openssh'
-ENV dependencies 'openssl'
+ENV dependencies 'openssl sqlite-dev'
 
 RUN apk add --update --no-cache ${build_deps} \
   # Install dependencies
