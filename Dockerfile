@@ -40,7 +40,7 @@ RUN apk add --update --no-cache ${build_deps} \
     mecab-${IPADIC_VERSION}* \
     mecab-ipadic-neologd
 
-RUN apk add --no-cache perl
+RUN apk add --no-cache perl imagemagick
 
 RUN mkdir tagger && cd tagger && \
 	curl -o tree-tagger-linux-3.2.tar.gz http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz && \
