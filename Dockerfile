@@ -1,15 +1,12 @@
 FROM ruby:2.5.1-alpine3.7
 MAINTAINER Atsushi Nagase<a@ngs.io>
 
-
-RUN apk add --update --no-cache build-base git curl git bash python nodejs nodejs-npm
-
 ENV MECAB_VERSION 0.996
 ENV IPADIC_VERSION 2.7.0-20070801
 ENV mecab_url https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicTFaRUE
 ENV ipadic_url https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7MWVlSDBCSXZMTXM
-ENV build_deps 'file sudo openssh'
-ENV dependencies 'openssl sqlite-dev'
+ENV build_deps 'file sudo'
+ENV dependencies 'openssl sqlite-dev build-base git curl git bash python nodejs nodejs-npm openssh perl imagemagick'
 
 RUN apk add --update --no-cache ${build_deps} \
   # Install dependencies
@@ -39,8 +36,6 @@ RUN apk add --update --no-cache ${build_deps} \
     mecab-${MECAB_VERSION}* \
     mecab-${IPADIC_VERSION}* \
     mecab-ipadic-neologd
-
-RUN apk add --no-cache perl imagemagick
 
 RUN mkdir tagger && cd tagger && \
 	curl -o tree-tagger-linux-3.2.tar.gz http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz && \
